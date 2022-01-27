@@ -487,7 +487,7 @@ const userVerificationCredentialSSOExtension = {
     'authenticator-verification-okta-verify-signed-nonce-credential-sso-extension'
   ],
   '/idp/idx/authenticators/sso_extension/transactions/:transactionId/verify/cancel': [
-    'identify'// see index.js for details
+    'identify'// see playground/mocks/spec-okta-api/idp/idx/index.js for details
   ],
 };
 
@@ -993,5 +993,5 @@ const selectOktaVerifyMethod = {
 };
 
 module.exports = {
-  mocks: userVerificationCredentialSSOExtensionBiometricsError,
+  mocks: idx,
 };

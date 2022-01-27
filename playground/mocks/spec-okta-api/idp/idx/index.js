@@ -1,9 +1,9 @@
 const templateHelper = require('../../../config/templateHelper');
 const cancelTransaction = require('../../../data/idp/idx/identify-with-no-sso-extension');
-const biometricsErrorMobile = 
-  require('../../../data/idp/idx/error-okta-verify-uv-fastpass-verify-enable-biometrics-mobile');
-const biometricsErrorDesktop = 
-  require('../../../data/idp/idx/error-okta-verify-uv-fastpass-verify-enable-biometrics-desktop');
+// const biometricsErrorMobile = 
+//   require('../../../data/idp/idx/error-okta-verify-uv-fastpass-verify-enable-biometrics-mobile');
+// const biometricsErrorDesktop = 
+//   require('../../../data/idp/idx/error-okta-verify-uv-fastpass-verify-enable-biometrics-desktop');
 
 const idx = [
   '/idp/idx',
