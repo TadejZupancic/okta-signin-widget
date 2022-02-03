@@ -16,6 +16,7 @@ import { getV1ClassName } from '../ion/ViewClassNamesFactory';
 import { FORMS, TERMINAL_FORMS, FORM_NAME_TO_OPERATION_MAP } from '../ion/RemediationConstants';
 import Util from '../../util/Util';
 import sessionStorageHelper from '../client/sessionStorageHelper';
+import { CONFIGURED_FLOW } from '../client/constants';
 
 export default Controller.extend({
   className: 'form-controller',
@@ -41,8 +42,12 @@ export default Controller.extend({
 
     this.clearMetadata();
 
+    let formName = currentViewState.name;
+    if (formName === 'identify' && this.options.settings.get('flow') === CONFIGURED_FLOW.RESET_PASSWORD) {
+      formName = 'identify-recovery';
+    }
     const TheView = ViewFactory.create(
-      currentViewState.name,
+      formName,
       this.options.appState.get('authenticatorKey'),
     );
     try {
@@ -170,7 +175,8 @@ export default Controller.extend({
     }
   },
 
-  handleSaveForm(model) {
+  // eslint-disable-next-line max-statements
+  async handleSaveForm(model) {
     const formName = model.get('formName');
 
     // Toggle Form saving status (e.g. disabling save button, etc)
@@ -192,43 +198,48 @@ export default Controller.extend({
     const modelJSON = this.transformIdentifier(formName, model);
 
     // Error out when this is not a remediation form. Unexpected Exception.
-    const idx = this.options.appState.get('idx');
     if (!this.options.appState.hasRemediationObject(formName)) {
       this.options.settings.callGlobalError(`Cannot find http action for "${formName}".`);
       this.showFormErrors(this.formView.model, 'Cannot find action to proceed.', this.formView.form);
       return;
     }
 
-    // Submit request to idx endpoint
-    idx.proceed(formName, modelJSON)
-      .then((resp) => {
-        const onSuccess = this.handleIdxResponse.bind(this, resp);
+    // Reset password in identity-first flow needs some help to auto-select password and begin the reset flow
+    if (formName === 'identify' && this.options.settings.get('flow') === CONFIGURED_FLOW.RESET_PASSWORD) {
+      modelJSON.authenticator = 'okta_password';
+    }
 
-        if (formName === FORMS.ENROLL_PROFILE) {
-          // call registration (aka enroll profile) hook
-          this.settings.postRegistrationSubmit(modelJSON?.userProfile?.email, onSuccess, (error) => {
-            model.trigger('error', model, {
-              responseJSON: error,
-            });
+    // Submit request to idx endpoint
+    const authClient = this.options.settings.getAuthClient();
+    try {
+
+      let resp = await authClient.idx.proceed({ step: formName, ...modelJSON });
+
+      const onSuccess = this.handleIdxResponse.bind(this, resp);
+      if (formName === FORMS.ENROLL_PROFILE) {
+        // call registration (aka enroll profile) hook
+        this.settings.postRegistrationSubmit(modelJSON?.userProfile?.email, onSuccess, (error) => {
+          model.trigger('error', model, {
+            responseJSON: error,
           });
-        } else {
-          onSuccess();
-        }
-      }).catch(error => {
-        if (error.stepUp) {
-          // Okta server responds 401 status code with WWW-Authenticate header and new remediation
-          // so that the iOS/MacOS credential SSO extension (Okta Verify) can intercept
-          // the response reaches here when Okta Verify is not installed
-          // we need to return an idx object so that
-          // the SIW can proceed to the next step without showing error
-          this.handleIdxResponse(error);
-        } else {
-          this.showFormErrors(model, error, this.formView.form);
-        }
-      })
-      .finally(() => {
-        this.toggleFormButtonState(false);
-      });
+        });
+      } else {
+        onSuccess();
+      }
+    } catch(error) {
+      if (error.stepUp) {
+        // Okta server responds 401 status code with WWW-Authenticate header and new remediation
+        // so that the iOS/MacOS credential SSO extension (Okta Verify) can intercept
+        // the response reaches here when Okta Verify is not installed
+        // we need to return an idx object so that
+        // the SIW can proceed to the next step without showing error
+        this.handleIdxResponse(error);
+      } else {
+        this.showFormErrors(model, error, this.formView.form);
+      }
+    } finally {
+      this.toggleFormButtonState(false);
+    }
   },
 
   transformIdentifier(formName, model) {
