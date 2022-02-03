@@ -15,7 +15,7 @@ module.exports = {
   transform: {
     '^.+\\.(js)$': 'babel-jest',
   },
-  transformIgnorePatterns: ['/node_modules/', '/packages/', '/dist/', '/build/'],
+  transformIgnorePatterns: ['/node_modules/', '/packages/', '/dist/', '/okta-auth-js/build/'],
   restoreMocks: true,
   moduleDirectories: [SRC, 'packages', 'node_modules'],
   moduleNameMapper: {
