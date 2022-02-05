@@ -9,11 +9,6 @@ setup_service yarn 1.21.1 /etc/pki/tls/certs/ca-bundle.crt
 
 cd ${OKTA_HOME}/${REPO}
 
-if ! yarn install ; then
-  echo "yarn install failed! Exiting..."
-  exit ${FAILED_SETUP}
-fi
-
 # DO NOT MERGE - BETA VERSION - DO NOT MERGE
 echo "Installing BETA VERSION"
 
@@ -23,3 +18,8 @@ yarn add -DW --no-lockfile https://artifacts.aue1d.saasure.com/artifactory/npm-t
 
 echo "BETA VERSION installed"
 # End BETA VERSION
+
+if ! yarn install ; then
+  echo "yarn install failed! Exiting..."
+  exit ${FAILED_SETUP}
+fi
