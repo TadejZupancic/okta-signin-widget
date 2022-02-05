@@ -212,8 +212,9 @@ export default Controller.extend({
     // Submit request to idx endpoint
     const authClient = this.options.settings.getAuthClient();
     try {
-
-      let resp = await authClient.idx.proceed({ step: formName, ...modelJSON });
+      const idx = this.options.appState.get('idx');
+      const { stateHandle } = idx.context;
+      let resp = await authClient.idx.proceed({ step: formName, stateHandle, ...modelJSON });
 
       const onSuccess = this.handleIdxResponse.bind(this, resp);
       if (formName === FORMS.ENROLL_PROFILE) {
