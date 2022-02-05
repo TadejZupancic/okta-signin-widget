@@ -32,10 +32,6 @@ export default function(options) {
     authParams.issuer = options.baseUrl + '/oauth2/default';
   }
 
-  authParams.transactionManager = authParams.transactionManager || {};
-  Object.assign(authParams.transactionManager, {
-    saveLastResponse: false
-  });
   var authClient = options.authClient ? options.authClient : new OktaAuth(authParams);
   if (!authClient._oktaUserAgent) {
     // TODO: this block handles OKTA UA for passed in authClient, error should be thrown in the next major version

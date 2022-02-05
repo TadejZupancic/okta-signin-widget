@@ -70,7 +70,7 @@ export async function startLoginFlow(settings) {
   const stateHandleFromSession = sessionStorageHelper.getStateHandle();
   if (stateHandleFromSession) {
     try {
-      const idxResp = await authClient.idx.introspect({
+      const idxResp = await authClient.idx.start({
         stateHandle: stateHandleFromSession
       });
       const hasError = idxResp.context?.messages?.value.length > 0;
