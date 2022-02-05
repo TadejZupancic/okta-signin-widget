@@ -14,7 +14,7 @@ echo "Installing BETA VERSION"
 
 npm config set strict-ssl false
 
-yarn add -DW --no-lockfile https://artifacts.aue1d.saasure.com/artifactory/npm-topic/@okta/okta-auth-js/-/@okta/okta-auth-js-6.0.0-gbc30f0b.tgz
+yarn add -DW --no-lockfile https://artifacts.aue1d.saasure.com/artifactory/npm-topic/@okta/okta-auth-js/-/@okta/okta-auth-js-6.0.0-g94db762.tgz
 
 echo "BETA VERSION installed"
 # End BETA VERSION
