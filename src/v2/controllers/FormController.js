@@ -195,7 +195,7 @@ export default Controller.extend({
     }
 
     // Run hook: transform the user name (a.k.a identifier)
-    const modelJSON = this.transformIdentifier(formName, model);
+    const values = this.transformIdentifier(formName, model);
 
     // Error out when this is not a remediation form. Unexpected Exception.
     if (!this.options.appState.hasRemediationObject(formName)) {
@@ -206,7 +206,7 @@ export default Controller.extend({
 
     // Reset password in identity-first flow needs some help to auto-select password and begin the reset flow
     if (formName === 'identify' && this.options.settings.get('flow') === CONFIGURED_FLOW.RESET_PASSWORD) {
-      modelJSON.authenticator = 'okta_password';
+      values.authenticator = 'okta_password';
     }
 
     // Submit request to idx endpoint
@@ -214,12 +214,17 @@ export default Controller.extend({
     try {
       const idx = this.options.appState.get('idx');
       const { stateHandle } = idx.context;
-      let resp = await authClient.idx.proceed({ step: formName, stateHandle, ...modelJSON });
+      let resp = await authClient.idx.proceed({
+        exchangeCodeForTokens: false,
+        step: formName,
+        stateHandle,
+        ...values
+      });
 
       const onSuccess = this.handleIdxResponse.bind(this, resp);
       if (formName === FORMS.ENROLL_PROFILE) {
         // call registration (aka enroll profile) hook
-        this.settings.postRegistrationSubmit(modelJSON?.userProfile?.email, onSuccess, (error) => {
+        this.settings.postRegistrationSubmit(values?.userProfile?.email, onSuccess, (error) => {
           model.trigger('error', model, {
             responseJSON: error,
           });
