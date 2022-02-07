@@ -17,6 +17,7 @@ import { FORMS, TERMINAL_FORMS, FORM_NAME_TO_OPERATION_MAP } from '../ion/Remedi
 import Util from '../../util/Util';
 import sessionStorageHelper from '../client/sessionStorageHelper';
 import { CONFIGURED_FLOW } from '../client/constants';
+import { IdxStatus } from '@okta/okta-auth-js';
 
 export default Controller.extend({
   className: 'form-controller',
@@ -220,7 +221,9 @@ export default Controller.extend({
         stateHandle,
         ...values
       });
-
+      if (resp.status === IdxStatus.FAILURE) {
+        throw resp.error; // caught and handled in this function
+      }
       const onSuccess = this.handleIdxResponse.bind(this, resp);
       if (formName === FORMS.ENROLL_PROFILE) {
         // call registration (aka enroll profile) hook
