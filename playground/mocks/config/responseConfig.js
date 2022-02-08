@@ -498,7 +498,7 @@ const userVerificationCredentialSSOExtensionBiometricsError = {
   ],
   '/idp/idx/authenticators/sso_extension/transactions/:transactionId/verify': [
     'error-okta-verify-uv-fastpass-verify-enable-biometrics-mobile'
-    // 'error-okta-verify-uv-fastpass-verify-enable-biometrics-desktop'
+    //'error-okta-verify-uv-fastpass-verify-enable-biometrics-desktop'
   ],
 };
 

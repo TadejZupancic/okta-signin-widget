@@ -125,7 +125,7 @@ const Body = BaseFormWithPolling.extend(Object.assign(
     },
 
     showCustomFormErrorCallout(error) {
-      const options = getBiometricsErrorOptions(error);
+      const options = getBiometricsErrorOptions(error, false);
       
       if (_.isEmpty(options)) {
         return false;

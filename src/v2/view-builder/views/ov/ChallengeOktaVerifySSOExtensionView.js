@@ -1,7 +1,6 @@
 import BaseAuthenticatorView from '../../components/BaseAuthenticatorView';
 import { BaseForm } from '../../internals';
-import { loc, createCallout, _ } from 'okta';
-import { getBiometricsErrorOptions } from '../../utils/ChallengeViewUtil';
+import { loc } from 'okta';
 
 // for EA,
 // redirect is needed for Apple SSO Extension to intercept the request, because
@@ -28,17 +27,6 @@ const Body = BaseForm.extend({
     const isGetMethod = this.options.currentViewState?.method?.toLowerCase() === 'get';
     this.model.set('useRedirect', isGetMethod);
     this.trigger('save', this.model);
-  },
-
-  showCustomFormErrorCallout(error) {
-    const options = getBiometricsErrorOptions(error);
-    
-    if (_.isEmpty(options)) {
-      return false;
-    }
-
-    this.showMessages(createCallout(options));
-    return true;
   },
 });
 

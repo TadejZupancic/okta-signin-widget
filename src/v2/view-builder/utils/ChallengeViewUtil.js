@@ -145,8 +145,14 @@ export function doChallenge(view, fromView) {
   }
 }
 
-export function getBiometricsErrorOptions(error) {
-  const errorSummaryKeys = error?.responseJSON?.errorSummaryKeys;
+export function getBiometricsErrorOptions(error, isMessageObj) {
+  let errorSummaryKeys;
+  if (isMessageObj) {
+    errorSummaryKeys  = Object.values(error?.value[0]?.i18n);
+  } else {
+    errorSummaryKeys = error?.responseJSON?.errorSummaryKeys;
+  }
+
   const isBiometricsRequiredMobile = errorSummaryKeys 
       && errorSummaryKeys.includes(OV_UV_ENABLE_BIOMETRICS_FASTPASS_MOBILE);
   const isBiometricsRequiredDesktop = errorSummaryKeys 

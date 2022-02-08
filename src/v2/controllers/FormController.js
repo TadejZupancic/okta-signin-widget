@@ -14,8 +14,6 @@ import ViewFactory from '../view-builder/ViewFactory';
 import IonResponseHelper from '../ion/IonResponseHelper';
 import { getV1ClassName } from '../ion/ViewClassNamesFactory';
 import { FORMS, TERMINAL_FORMS, FORM_NAME_TO_OPERATION_MAP } from '../ion/RemediationConstants';
-import { OV_UV_ENABLE_BIOMETRICS_FASTPASS_DESKTOP, 
-  OV_UV_ENABLE_BIOMETRICS_FASTPASS_MOBILE } from '../view-builder/utils/Constants';
 import Util from '../../util/Util';
 import sessionStorageHelper from '../client/sessionStorageHelper';
 import { clearTransactionMeta } from '../client';
@@ -218,7 +216,7 @@ export default Controller.extend({
           onSuccess();
         }
       }).catch(error => {
-        if (error.stepUp && !this.isBiometricsErrorFlow(error)) {
+        if (error.stepUp) {
           // Okta server responds 401 status code with WWW-Authenticate header and new remediation
           // so that the iOS/MacOS credential SSO extension (Okta Verify) can intercept
           // the response reaches here when Okta Verify is not installed
@@ -234,17 +232,6 @@ export default Controller.extend({
       .finally(() => {
         this.toggleFormButtonState(false);
       });
-  },
-
-  isBiometricsErrorFlow(error) {
-    if (!error?.context?.messages) {
-      return false;
-    }
-
-    const messagesObjs = error.context.messages.value;
-    const biometricsErrorKeys = [OV_UV_ENABLE_BIOMETRICS_FASTPASS_DESKTOP, OV_UV_ENABLE_BIOMETRICS_FASTPASS_MOBILE];
-    return messagesObjs && Array.isArray(messagesObjs)
-    && messagesObjs.some(messagesObj => _.contains(biometricsErrorKeys, messagesObj.i18n?.key));
   },
 
   transformIdentifier(formName, model) {
