@@ -176,7 +176,7 @@ export default Controller.extend({
     }
   },
 
-  // eslint-disable-next-line max-statements
+  // eslint-disable-next-line max-statements, complexity
   async handleSaveForm(model) {
     const formName = model.get('formName');
 
@@ -223,6 +223,10 @@ export default Controller.extend({
       });
       if (resp.status === IdxStatus.FAILURE) {
         throw resp.error; // caught and handled in this function
+      }
+      if (resp.messages && resp.messages.length > 0) {
+        this.showFormErrors(model, resp, this.formView.form);
+        return;
       }
       const onSuccess = this.handleIdxResponse.bind(this, resp);
       if (formName === FORMS.ENROLL_PROFILE) {
