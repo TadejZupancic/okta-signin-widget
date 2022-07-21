@@ -49,6 +49,8 @@ function beaconIsAvailable(Beacon, settings) {
 
 export default Router.extend({
   Events: Backbone.Events,
+  //currentOptions: {},
+  //CurrentController: null,
 
   initialize: function(options) {
     // Create a default success and/or error handler if
@@ -65,8 +67,11 @@ export default Router.extend({
     this.settings = new Settings(_.omit(options, 'el', 'authClient'), { parse: true });
     this.settings.setAuthClient(options.authClient);
 
+    this.currentOptions = {};
+    this.CurrentController = null;
+
     if (!options.el) {
-      this.settings.callGlobalError(new Errors.ConfigError(loc('error.required.el')));
+      this.settings.callGlobalError(new Errors.ConfigError(() => loc('error.required.el')));
     }
 
     $('body > div').on('click', function() {
@@ -165,6 +170,8 @@ export default Router.extend({
 
   render: function(Controller, options) {
     options || (options = {});
+    this.currentOptions = options;
+    this.CurrentController = Controller;
 
     let Beacon = options.Beacon;
 
@@ -297,4 +304,21 @@ export default Router.extend({
     Bundles.remove();
     Backbone.history.stop();
   },
+
+  setLanguage: function(language) {
+    //console.log("setLanguage BaseLoginRouter");
+    //console.log(this.appState.get('languageCode'));
+    this.appState.set('languageCode',language);
+    this.settings.setLanguage(language);
+    /*this.appState.set('language',language);
+    this.settings.set('language',language);
+    this.settings.options.language = language;
+    this.controller.model.appState.set('languageCode',language);
+    this.controller.model.appState.set('language',language);
+    this.controller.model.settings.set('language',language);
+    console.log(this.appState.get('languageCode'));*/
+    //this.controller.render()
+    if (this.CurrentController == null) return;
+    this.render(this.CurrentController, this.currentOptions);
+  }
 });

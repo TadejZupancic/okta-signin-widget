@@ -147,17 +147,17 @@ export default FormController.extend({
 
     formChildren: function() {
       const instructions = this.settings.get('brandName')
-        ? loc('enroll.totp.sharedSecretInstructions.specific', 'login', [this.settings.get('brandName')])
-        : loc('enroll.totp.sharedSecretInstructions.generic', 'login');
+        ? () => loc('enroll.totp.sharedSecretInstructions.specific', 'login', [this.settings.get('brandName')])
+        : () => loc('enroll.totp.sharedSecretInstructions.generic', 'login');
       const children = [
         FormType.Input({
           name: 'activationType',
           type: 'select',
           wide: true,
           options: {
-            SMS: loc('enroll.totp.sendSms', 'login'),
-            EMAIL: loc('enroll.totp.sendEmail', 'login'),
-            MANUAL: loc('enroll.totp.setupManually', 'login'),
+            SMS: () => loc('enroll.totp.sendSms', 'login'),
+            EMAIL: () => loc('enroll.totp.sendEmail', 'login'),
+            MANUAL: () => loc('enroll.totp.setupManually', 'login'),
           },
         }),
         FormType.Input({
@@ -168,7 +168,7 @@ export default FormController.extend({
           showWhen: { activationType: 'SMS' },
         }),
         FormType.Input({
-          label: loc('mfa.phoneNumber.placeholder', 'login'),
+          label: () => loc('mfa.phoneNumber.placeholder', 'login'),
           'label-top': true,
           className: 'enroll-sms-phone',
           name: 'phoneNumber',
@@ -211,7 +211,7 @@ export default FormController.extend({
         }),
         FormType.Button(
           {
-            title: loc('oform.next', 'login'),
+            title: () => loc('oform.next', 'login'),
             className: 'button button-primary button-wide button-next',
             attributes: { 'data-se': 'next-button' },
             click: () => {
@@ -223,7 +223,7 @@ export default FormController.extend({
         ),
         FormType.Toolbar({
           noCancelButton: true,
-          save: loc('oform.send', 'login'),
+          save: () => loc('oform.send', 'login'),
           showWhen: {
             activationType: function(val) {
               return val === 'SMS' || val === 'EMAIL';

@@ -86,7 +86,7 @@ export default FormController.extend({
       children = children.concat([
         FormType.Input({
           className: 'margin-btm-5',
-          label: loc('password.newPassword.placeholder', 'login'),
+          label: () => loc('password.newPassword.placeholder', 'login'),
           'label-top': true,
           explain: Util.createInputExplain('password.newPassword.tooltip', 'password.newPassword.placeholder', 'login'),
           'explain-top': true,
@@ -96,7 +96,7 @@ export default FormController.extend({
           autoComplete: 'new-password',
         }),
         FormType.Input({
-          label: loc('password.confirmPassword.placeholder', 'login'),
+          label: () => loc('password.confirmPassword.placeholder', 'login'),
           'label-top': true,
           explain: Util.createInputExplain(
             'password.confirmPassword.tooltip',

@@ -106,6 +106,10 @@ var OktaSignIn = (function() {
       return router?.appState?.getUser();
     }
 
+    function setLanguage(language) {
+      router.setLanguage(language);
+    }
+
     // Properties exposed on OktaSignIn object.
     return {
       renderEl: render,
@@ -119,6 +123,7 @@ var OktaSignIn = (function() {
       before,
       after,
       getUser,
+      setLanguage,
     };
   }
 

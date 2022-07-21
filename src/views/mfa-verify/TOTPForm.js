@@ -27,13 +27,13 @@ export default Form.extend({
 
     this.title = factorName;
     if (this.model.get('isFactorTypeVerification')) {
-      this.subtitle = loc('mfa.challenge.totp.subtitle.multiple', 'login', [factorName]);
+      this.subtitle = () => loc('mfa.challenge.totp.subtitle.multiple', 'login', [factorName]);
     } else {
-      this.subtitle = loc('mfa.challenge.title', 'login', [factorName]);
+      this.subtitle = () => loc('mfa.challenge.title', 'login', [factorName]);
     }
 
     this.addInput({
-      label: loc('mfa.challenge.enterCode.placeholder', 'login'),
+      label: () => loc('mfa.challenge.enterCode.placeholder', 'login'),
       'label-top': true,
       className: 'o-form-fieldset o-form-label-top auth-passcode',
       name: 'answer',

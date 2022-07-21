@@ -95,8 +95,8 @@ const EnrollTotpControllerEnrollTotpController = FormController.extend({
 
     formChildren: function() {
       const inputOptions = {
-        APPLE: loc('iphone', 'login'),
-        ANDROID: loc('android', 'login'),
+        APPLE: () => loc('iphone', 'login'),
+        ANDROID: () => loc('android', 'login'),
       };
       const children = [
         FormType.Input({
@@ -113,7 +113,7 @@ const EnrollTotpControllerEnrollTotpController = FormController.extend({
         }),
         FormType.Toolbar({
           noCancelButton: true,
-          save: loc('oform.next', 'login'),
+          save: () => loc('oform.next', 'login'),
           showWhen: showWhenDeviceTypeSelected,
         }),
       ];

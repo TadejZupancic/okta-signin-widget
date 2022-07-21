@@ -53,8 +53,8 @@ export default FormController.extend({
             ),
             getTemplateData: function() {
               return {
-                desc: loc('registration.complete.confirm.text', 'login'),
-                title: loc('registration.complete.title', 'login'),
+                desc: () => loc('registration.complete.confirm.text', 'login'),
+                title: () => loc('registration.complete.title', 'login'),
               };
             },
           }),

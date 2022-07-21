@@ -188,10 +188,10 @@ export default FormController.extend({
   Form: function() {
     const factorType = this.options.factorType;
     const isCall = isCallFactor(factorType);
-    const formTitle = loc(isCall ? 'enroll.call.setup' : 'enroll.sms.setup', 'login');
-    const formSubmit = loc(isCall ? 'mfa.call' : 'mfa.sendCode', 'login');
-    const formRetry = loc(isCall ? 'mfa.redial' : 'mfa.resendCode', 'login');
-    const formSubmitted = loc(isCall ? 'mfa.calling' : 'mfa.sent', 'login');
+    const formTitle = () => loc(isCall ? 'enroll.call.setup' : 'enroll.sms.setup', 'login');
+    const formSubmit = () => loc(isCall ? 'mfa.call' : 'mfa.sendCode', 'login');
+    const formRetry = () => loc(isCall ? 'mfa.redial' : 'mfa.resendCode', 'login');
+    const formSubmitted = () => loc(isCall ? 'mfa.calling' : 'mfa.sent', 'login');
     const numberFieldClassName = isCall ? 'enroll-call-phone' : 'enroll-sms-phone';
     const buttonClassName = isCall ? 'call-request-button' : 'sms-request-button';
     const formChildren = [
@@ -202,7 +202,7 @@ export default FormController.extend({
         options: CountryUtil.getCountries(),
       }),
       FormType.Input({
-        label: loc('mfa.phoneNumber.placeholder', 'login'),
+        label: () => loc('mfa.phoneNumber.placeholder', 'login'),
         'label-top': true,
         className: numberFieldClassName,
         name: 'phoneNumber',
@@ -220,7 +220,7 @@ export default FormController.extend({
     if (isCall) {
       formChildren.push(
         FormType.Input({
-          label: loc('mfa.phoneNumber.ext.placeholder', 'login'),
+          label: () => loc('mfa.phoneNumber.ext.placeholder', 'login'),
           'label-top': true,
           className: 'enroll-call-extension',
           name: 'phoneExtension',
@@ -263,7 +263,7 @@ export default FormController.extend({
         showWhen: factorIdIsDefined,
       }),
       FormType.Input({
-        label: loc('mfa.challenge.enterCode.placeholder', 'login'),
+        label: () => loc('mfa.challenge.enterCode.placeholder', 'login'),
         'label-top': true,
         explain: Util.createInputExplain(
           'mfa.challenge.enterCode.tooltip',
@@ -278,7 +278,7 @@ export default FormController.extend({
       }),
       FormType.Toolbar({
         noCancelButton: true,
-        save: loc('mfa.challenge.verify', 'login'),
+        save: () => loc('mfa.challenge.verify', 'login'),
         showWhen: factorIdIsDefined,
       })
     );

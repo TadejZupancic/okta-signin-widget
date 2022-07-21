@@ -44,7 +44,7 @@ export default FormController.extend({
               '
             ),
             getTemplateData: function() {
-              return { alert: loc('password.forgot.emailSent.title', 'login') };
+              return { alert: () => loc('password.forgot.emailSent.title', 'login') };
             },
           }),
         }),

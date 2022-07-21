@@ -148,7 +148,7 @@ export default FormController.extend({
         }
         result.push(
           FormType.View(
-            { View: new HtmlErrorMessageView({ message: loc(errorMessageKey, 'login') }) },
+            { View: new HtmlErrorMessageView({ message: () => loc(errorMessageKey, 'login') }) },
             { selector: '.o-form-error-container' }
           )
         );

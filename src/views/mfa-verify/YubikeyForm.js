@@ -25,10 +25,10 @@ export default Form.extend({
     const factorName = this.model.get('factorLabel');
 
     this.title = factorName;
-    this.subtitle = loc('factor.totpHard.yubikey.description', 'login');
+    this.subtitle = () => loc('factor.totpHard.yubikey.description', 'login');
 
     this.addInput({
-      label: loc('factor.totpHard.yubikey.placeholder', 'login'),
+      label: () => loc('factor.totpHard.yubikey.placeholder', 'login'),
       'label-top': true,
       className: 'o-form-fieldset o-form-label-top auth-passcode',
       name: 'answer',

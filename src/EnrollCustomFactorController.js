@@ -52,8 +52,8 @@ export default FormController.extend({
       factorType: this.options.factorType,
     });
     const vendorName = factor.get('vendorName');
-    const subtitle = loc('enroll.customFactor.subtitle', 'login', [vendorName]);
-    const saveText = loc('enroll.customFactor.save', 'login');
+    const subtitle = () => loc('enroll.customFactor.subtitle', 'login', [vendorName]);
+    const saveText = () => loc('enroll.customFactor.save', 'login');
 
     return {
       autoSave: true,

@@ -89,7 +89,7 @@ export default BaseLoginController.extend({
           options: {
             model: this.model,
             name: 'autoPush',
-            placeholder: loc('autoPush', 'login'),
+            placeholder: () => loc('autoPush', 'login'),
             label: false,
             'label-top': false,
             className: 'margin-btm-0',

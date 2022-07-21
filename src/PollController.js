@@ -38,7 +38,7 @@ export default FormController.extend({
     },
     className: 'poll-controller',
     noCancelButton: true,
-    save: loc('oform.cancel', 'login'),
+    save: () => loc('oform.cancel', 'login'),
     modelEvents: {
       cancelRequest: '_stopCountDown',
     },
@@ -92,7 +92,7 @@ export default FormController.extend({
     },
 
     _updateTitle: function(factorPollingIntervalSeconds) {
-      this.title = loc('polling.title', 'login', [factorPollingIntervalSeconds]);
+      this.title = () => loc('polling.title', 'login', [factorPollingIntervalSeconds]);
       this.$el.find('.okta-form-title').text(this.title);
     },
 

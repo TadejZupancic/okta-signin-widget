@@ -65,7 +65,7 @@ export default FormController.extend({
     formChildren: function() {
       return [
         FormType.Button({
-          title: loc('mfa.resendCode', 'login'),
+          title: () => loc('mfa.resendCode', 'login'),
           attributes: { 'data-se': 'resend-button' },
           className: 'button sms-request-button margin-top-30',
           click: function() {
@@ -74,11 +74,11 @@ export default FormController.extend({
           initialize: function() {
             this.listenTo(this.model, 'change:ableToResend', function(model, ableToResend) {
               if (ableToResend) {
-                this.options.title = loc('mfa.resendCode', 'login');
+                this.options.title = () => loc('mfa.resendCode', 'login');
                 this.enable();
                 this.render();
               } else {
-                this.options.title = loc('mfa.sent', 'login');
+                this.options.title = () => loc('mfa.sent', 'login');
                 this.disable();
                 this.render();
               }
@@ -86,7 +86,7 @@ export default FormController.extend({
           },
         }),
         FormType.Input({
-          label: loc('mfa.challenge.enterCode.placeholder', 'login'),
+          label: () => loc('mfa.challenge.enterCode.placeholder', 'login'),
           'label-top': true,
           className: 'enroll-sms-phone',
           name: 'passCode',

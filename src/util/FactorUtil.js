@@ -330,7 +330,7 @@ fn.isOktaVerify = function(provider, factorType) {
 fn.getFactorLabel = function(provider, factorType) {
   const key = factorData[fn.getFactorName.apply(this, [provider, factorType])].label;
 
-  return loc(key, 'login');
+  return () => loc(key, 'login');
 };
 
 fn.getFactorDescription = function(provider, factorType) {
@@ -340,9 +340,9 @@ fn.getFactorDescription = function(provider, factorType) {
     const brandName = this.settings.get('brandName');
     const key = descriptionKey(brandName);
 
-    return brandName ? loc(key, 'login', [brandName]) : loc(key, 'login');
+    return brandName ? () => loc(key, 'login', [brandName]) : () => loc(key, 'login');
   } else {
-    return loc(descriptionKey, 'login');
+    return () => loc(descriptionKey, 'login');
   }
 };
 

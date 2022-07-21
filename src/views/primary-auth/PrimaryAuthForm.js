@@ -108,7 +108,7 @@ export default Form.extend({
   getUsernameField: function() {
     const userNameFieldObject = {
       className: 'margin-btm-5',
-      label: loc('primaryauth.username.placeholder', 'login'),
+      label: () => loc('primaryauth.username.placeholder', 'login'),
       'label-top': true,
       explain: () => {
         if (!this.isCustomized('primaryauth.username.tooltip')) {
@@ -157,7 +157,7 @@ export default Form.extend({
   getPasswordField: function() {
     const passwordFieldObject = {
       className: 'margin-btm-30',
-      label: loc('primaryauth.password.placeholder', 'login'),
+      label: () => loc('primaryauth.password.placeholder', 'login'),
       'label-top': true,
       explain: () => {
         if (!this.isCustomized('primaryauth.password.tooltip')) {
@@ -217,7 +217,7 @@ export default Form.extend({
   getRemeberMeCheckbox: function() {
     return {
       label: false,
-      placeholder: loc('remember', 'login'),
+      placeholder: () => loc('remember', 'login'),
       name: 'remember',
       type: 'checkbox',
       'label-top': true,

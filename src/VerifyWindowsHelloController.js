@@ -107,7 +107,7 @@ export default FormController.extend({
       if (!webauthn.isAvailable()) {
         result.push(
           FormType.View(
-            { View: new HtmlErrorMessageView({ message: loc('enroll.windowsHello.error.notWindows', 'login') }) },
+            { View: new HtmlErrorMessageView({ message: () => loc('enroll.windowsHello.error.notWindows', 'login') }) },
             { selector: '.o-form-error-container' }
           )
         );
@@ -126,7 +126,7 @@ export default FormController.extend({
     },
 
     _startEnrollment: function() {
-      this.subtitle = loc('verify.windowsHello.subtitle.loading', 'login');
+      this.subtitle = () => loc('verify.windowsHello.subtitle.loading', 'login');
 
       this.model.trigger('spinner:show');
       this._resetErrorMessage();
@@ -136,7 +136,7 @@ export default FormController.extend({
     },
 
     _stopEnrollment: function(errorMessage) {
-      this.subtitle = loc('verify.windowsHello.subtitle', 'login');
+      this.subtitle = () => loc('verify.windowsHello.subtitle', 'login');
 
       this.model.trigger('spinner:hide');
       this.$('.o-form-button-bar').removeClass('hide');
@@ -146,12 +146,12 @@ export default FormController.extend({
       switch (errorMessage) {
       case 'NotFoundError':
         message = this.options.appState.get('factors').length > 1
-          ? loc('verify.windowsHello.error.notFound.selectAnother', 'login')
-          : loc('verify.windowsHello.error.notFound', 'login');
+          ? () => loc('verify.windowsHello.error.notFound.selectAnother', 'login')
+          : () => loc('verify.windowsHello.error.notFound', 'login');
         break;
 
       case 'NotSupportedError':
-        message = loc('enroll.windowsHello.error.notConfiguredHtml', 'login');
+        message = () => loc('enroll.windowsHello.error.notConfiguredHtml', 'login');
         break;
       }
 
@@ -172,8 +172,8 @@ export default FormController.extend({
 
     _successEnrollment: function() {
       this.subtitle = this.settings.get('brandName')
-        ? loc('verify.windowsHello.subtitle.signingIn.specific', 'login', [this.settings.get('brandName')])
-        : loc('verify.windowsHello.subtitle.signingIn.generic', 'login');
+        ? () => loc('verify.windowsHello.subtitle.signingIn.specific', 'login', [this.settings.get('brandName')])
+        : () => loc('verify.windowsHello.subtitle.signingIn.generic', 'login');
       this.render();
       this.$('.o-form-button-bar').addClass('hide');
     },

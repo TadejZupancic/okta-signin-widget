@@ -1,16 +1,16 @@
 // Page Properties
-$fonts: 'proxima nova', 'montserrat', Arial, Helvetica, sans-serif;
+$fonts: Roboto, "Helvetica Neue", sans-serif;//'proxima nova', 'montserrat', Arial, Helvetica, sans-serif;
 $default-border-radius: 3px;
 $container-width: 400px;
 $container-min-width: 300px;
 $num-tabs: 5;
 
 // Font Size
-$font-size: 14px;
-$font-size-small: 13px;
-$font-size-header: 15px;
-$font-size-footer: 12px;
-$font-size-default: 15px;
+$font-size: 16px;
+$font-size-small: 16px;
+$font-size-header: 16px;
+$font-size-footer: 14px;
+$font-size-default: 16px;
 
 // Font Weight
 $font-weight-body: normal;
@@ -18,13 +18,13 @@ $font-weight-labels: 600;
 $font-weight-header: 600;
 
 // Theme Color
-$primary-bg-color: #fff;
+$primary-bg-color: rgba(0, 0, 0, 0); //#fff;
 $secondary-bg-color: #f9f9f9;
 
 // Text Color
-$header-text-color: #5e5e5e;
-$dark-text-color: #5e5e5e;
-$medium-text-color: #777;
+$header-text-color: #fff;
+$dark-text-color: #000;
+$medium-text-color: #fff;
 $light-text-color: #a7a7a7;
 $link-text-color: #0074b3;
 $placeholder-text-color: #aaa;
@@ -34,13 +34,13 @@ $error-text-color: #e34843;
 $icon-button-bg-color: #fff;
 $button-bg-color: #fbfbfb;
 $dark-button-bg-color: #929292;
-$primary-button-bg-color: #007dc1;
+$primary-button-bg-color: #FFDD00; //#007dc1;
 $success-button-bg-color: #4cbf9c;
 $negative-button-bg-color: #c35151;
 $disabled-button-text-color: #aaa;
-$disabled-primary-button-text-color: #fff;
-$disabled-primary-button-bg-color: #63b1d7;
-$disabled-primary-border-color: #3096c9;
+$disabled-primary-button-text-color: #333;
+$disabled-primary-button-bg-color: #cbb000; //#4d6f80;
+$disabled-primary-border-color: #cbb000; //#3096c9;
 
 // Divider Colors
 $header-divider-color: #ddd;
@@ -87,8 +87,8 @@ $button-padding: 0 15px;
 $input-bg-color: #fff;
 $input-border-color: #bbb;
 $input-border-color-hover: #888;
-$input-border-color-focus: #0074b3;
-$input-shadow-color-focus: #51cbee;
+$input-border-color-focus: #b38f00;
+$input-shadow-color-focus: #edce51;
 $input-icons-color: #a7a7a7;
 
 // Modal

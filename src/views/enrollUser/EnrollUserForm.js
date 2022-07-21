@@ -36,7 +36,7 @@ export default Form.extend({
       this.addInput(inputOptions);
     });
     const requiredFieldsLabel = hbs('<span class="required-fields-label">{{label}}</span>')({
-      label: loc('registration.required.fields.label', 'login'),
+      label: () => loc('registration.required.fields.label', 'login'),
     });
 
     this.add(requiredFieldsLabel);

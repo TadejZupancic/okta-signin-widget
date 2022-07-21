@@ -29,7 +29,7 @@ const form = {
   formChildren: function() {
     return [
       FormType.Input({
-        label: loc('mfa.challenge.enterCode.placeholder', 'login'),
+        label: () => loc('mfa.challenge.enterCode.placeholder', 'login'),
         'label-top': true,
         explain: Util.createInputExplain(
           'mfa.challenge.enterCode.tooltip',
@@ -43,7 +43,7 @@ const form = {
       }),
       FormType.Toolbar({
         noCancelButton: true,
-        save: loc('oform.verify', 'login'), // TODO: deprecated by mfa.challenge.verify
+        save: () => loc('oform.verify', 'login'), // TODO: deprecated by mfa.challenge.verify
       }),
     ];
   },

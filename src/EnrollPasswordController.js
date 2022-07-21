@@ -52,7 +52,7 @@ export default FormController.extend({
     inputs: function() {
       return [
         {
-          label: loc('mfa.challenge.password.placeholder', 'login'),
+          label: () => loc('mfa.challenge.password.placeholder', 'login'),
           'label-top': true,
           className: 'o-form-fieldset o-form-label-top auth-passcode',
           name: 'password',
@@ -60,7 +60,7 @@ export default FormController.extend({
           type: 'password',
         },
         {
-          label: loc('password.confirmPassword.placeholder', 'login'),
+          label: () => loc('password.confirmPassword.placeholder', 'login'),
           'label-top': true,
           className: 'o-form-fieldset o-form-label-top auth-passcode',
           name: 'confirmPassword',

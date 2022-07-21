@@ -54,7 +54,7 @@ export default FormController.extend({
       return [
         FormType.Input({
           label: this.options.appState.get('recoveryQuestion'),
-          placeholder: loc('mfa.challenge.answer.placeholder', 'login'),
+          placeholder: () => loc('mfa.challenge.answer.placeholder', 'login'),
           name: 'answer',
           input: TextBox,
           type: 'password',
@@ -69,7 +69,7 @@ export default FormController.extend({
         FormType.Input({
           label: false,
           'label-top': true,
-          placeholder: loc('mfa.challenge.answer.showAnswer', 'login'),
+          placeholder: () => loc('mfa.challenge.answer.showAnswer', 'login'),
           className: 'recovery-question-show margin-btm-0',
           name: 'showAnswer',
           type: 'checkbox',

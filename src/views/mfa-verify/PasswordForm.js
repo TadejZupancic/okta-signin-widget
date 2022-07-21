@@ -24,7 +24,7 @@ export default Form.extend({
     this.title = this.model.get('factorLabel');
 
     this.addInput({
-      label: loc('mfa.challenge.password.placeholder', 'login'),
+      label: () => loc('mfa.challenge.password.placeholder', 'login'),
       'label-top': true,
       className: 'auth-passcode',
       name: 'password',

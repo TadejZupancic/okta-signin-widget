@@ -62,7 +62,7 @@ export default FormController.extend({
           },
         },
         {
-          label: loc('mfa.challenge.answer.placeholder', 'login'),
+          label: () => loc('mfa.challenge.answer.placeholder', 'login'),
           'label-top': true,
           explain: Util.createInputExplain('mfa.challenge.answer.tooltip', 'mfa.challenge.answer.placeholder', 'login'),
           'explain-top': true,

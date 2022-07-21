@@ -76,15 +76,15 @@ export default FormController.extend({
       factorType: this.options.factorType,
     });
     const vendorName = factor.get('vendorName');
-    const saveText = loc('mfa.challenge.verify', 'login');
+    const saveText = () => loc('mfa.challenge.verify', 'login');
     const lastFailedChallengeFactorData = this.options.appState.get('lastFailedChallengeFactorData');
-    let subtitle = loc('verify.customFactor.subtitle', 'login', [vendorName]);
+    let subtitle = () => loc('verify.customFactor.subtitle', 'login', [vendorName]);
 
     if (this.settings.get('features.skipIdpFactorVerificationBtn') && !lastFailedChallengeFactorData) {
-      subtitle = loc('verify.customFactor.subtitle.redirect', 'login', [vendorName]);
+      subtitle = () => loc('verify.customFactor.subtitle.redirect', 'login', [vendorName]);
 
       this.listenTo(this.model, 'error', () => {
-        subtitle = loc('verify.customFactor.subtitle', 'login', [vendorName]);
+        subtitle = () => loc('verify.customFactor.subtitle', 'login', [vendorName]);
         this.$('.o-form-explain').text(subtitle);
       });
     }

@@ -235,8 +235,8 @@ export default BaseLoginController.extend({
         layout: 'o-form-theme',
         autoSave: true,
         noCancelButton: true,
-        title: loc('registration.form.title', 'login'),
-        save: loc('registration.form.submit', 'login'),
+        title: () => loc('registration.form.title', 'login'),
+        save: () => loc('registration.form.submit', 'login'),
         modelEvents : { 'invalid' : 'modifyErrors' },
         hasSavingState: true,
         customSavingState: {
@@ -281,7 +281,7 @@ export default BaseLoginController.extend({
           }
         });
         const requiredFieldsLabel = hbs('<span class="required-fields-label">{{label}}</span>')({
-          label: loc('registration.required.fields.label', 'login'),
+          label: () => loc('registration.required.fields.label', 'login'),
         });
 
         form.add(requiredFieldsLabel);

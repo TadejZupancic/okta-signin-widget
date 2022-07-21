@@ -26,7 +26,7 @@ export default Form.extend({
     this.addInput({
       label: this.model.get('securityQuestion'),
       'label-top': true,
-      placeholder: loc('mfa.challenge.answer.placeholder', 'login'),
+      placeholder: () => loc('mfa.challenge.answer.placeholder', 'login'),
       className: 'auth-passcode',
       name: 'answer',
       type: 'password',

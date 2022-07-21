@@ -36,8 +36,8 @@ export default EnrollCustomFactorController.extend({
   Form: function() {
     const factor = new Factor.Model(this.options.appState.get('factor'), this.toJSON());
     const vendorName = factor.get('vendorName');
-    const subtitle = loc('enroll.customFactor.subtitle', 'login', [vendorName]);
-    const saveText = loc('enroll.customFactor.save', 'login');
+    const subtitle = () => loc('enroll.customFactor.subtitle', 'login', [vendorName]);
+    const saveText = () => loc('enroll.customFactor.save', 'login');
 
     return {
       autoSave: true,

@@ -75,7 +75,7 @@ const Form = function() {
       }),
       // passcode input
       FormType.Input({
-        label: loc('email.code.label', 'login'),
+        label: () => loc('email.code.label', 'login'),
         'label-top': true,
         name: 'passCode',
         type: 'text',

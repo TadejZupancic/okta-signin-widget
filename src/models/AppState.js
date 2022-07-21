@@ -700,11 +700,11 @@ export default Model.extend({
         if (policy && policy.rememberDeviceLifetimeInMinutes > 0) {
           const timeString = getMinutesString(policy.rememberDeviceLifetimeInMinutes);
 
-          return loc('rememberDevice.timebased', 'login', [timeString]);
+          return () => loc('rememberDevice.timebased', 'login', [timeString]);
         } else if (policy && policy.rememberDeviceLifetimeInMinutes === 0) {
-          return loc('rememberDevice.devicebased', 'login');
+          return () => loc('rememberDevice.devicebased', 'login');
         }
-        return loc('rememberDevice', 'login');
+        return () => loc('rememberDevice', 'login');
       },
     },
     rememberDeviceByDefault: {
@@ -747,7 +747,7 @@ export default Model.extend({
       deps: ['lastAuthResponse', 'isFactorResultFailed'],
       fn: function(res, isFactorResultFailed) {
         if (isFactorResultFailed) {
-          return res.factorResultMessage || loc('oform.error.unexpected', 'login');
+          return res.factorResultMessage || (() => loc('oform.error.unexpected', 'login'));
         }
         return null;
       },

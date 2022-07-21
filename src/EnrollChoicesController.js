@@ -136,7 +136,7 @@ export default FormController.extend({
           notEnrolledListTitle = loc('enroll.choices.list.optional', 'login');
           this.add(
             new FactorList({
-              listTitle: loc('enroll.choices.list.enrolled', 'login'),
+              listTitle: () => loc('enroll.choices.list.enrolled', 'login'),
               minimize: true,
               collection: new Collection(enrolled),
               appState: this.options.appState,

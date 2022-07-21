@@ -87,7 +87,7 @@ module.exports = function(outputFilename, mode = 'development') {
     node: false,
 
     optimization: {
-      minimize: true,
+      minimize: false,
       minimizer: [
         new TerserPlugin({
           terserOptions: {

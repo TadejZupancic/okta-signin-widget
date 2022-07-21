@@ -16,7 +16,7 @@ import TextBox from 'views/shared/TextBox';
 function addInlineTotp(form) {
   form.addDivider();
   form.addInput({
-    label: loc('mfa.challenge.enterCode.placeholder', 'login'),
+    label: () => loc('mfa.challenge.enterCode.placeholder', 'login'),
     'label-top': true,
     className: 'o-form-fieldset o-form-label-top inline-input auth-passcode',
     name: 'answer',
@@ -27,7 +27,7 @@ function addInlineTotp(form) {
     createButton({
       attributes: { 'data-se': 'inline-totp-verify' },
       className: 'button inline-totp-verify margin-top-30',
-      title: loc('mfa.challenge.verify', 'login'),
+      title: () => loc('mfa.challenge.verify', 'login'),
       click: function() {
         form.clearErrors();
         if (!form.isValid()) {
@@ -75,7 +75,7 @@ export default Form.extend({
       createButton({
         className: 'link',
         attributes: { 'data-se': 'inline-totp-add' },
-        title: loc('mfa.challenge.orEnterCode', 'login'),
+        title: () => loc('mfa.challenge.orEnterCode', 'login'),
         click: function() {
           this.remove();
           addInlineTotp(form);

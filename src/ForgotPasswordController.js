@@ -107,7 +107,7 @@ export default FormController.extend({
       } else {
         formChildren.push(
           FormType.Input({
-            label: loc('password.forgot.email.or.username.placeholder', 'login'),
+            label: () => loc('password.forgot.email.or.username.placeholder', 'login'),
             'label-top': true,
             explain: Util.createInputExplain(
               'password.forgot.email.or.username.tooltip',
@@ -137,11 +137,11 @@ export default FormController.extend({
                   let mobileFactors;
 
                   if (smsEnabled && callEnabled) {
-                    mobileFactors = loc('recovery.smsOrCall');
+                    mobileFactors = () => loc('recovery.smsOrCall');
                   } else if (callEnabled) {
-                    mobileFactors = loc('recovery.call');
+                    mobileFactors = () => loc('recovery.call');
                   } else {
-                    mobileFactors = loc('recovery.sms');
+                    mobileFactors = () => loc('recovery.sms');
                   }
                   return { mobileFactors: mobileFactors };
                 },
@@ -208,7 +208,7 @@ export default FormController.extend({
       return FormType.Button({
         attributes: { 'data-se': className },
         className: 'button button-primary button-wide ' + className,
-        title: loc(labelCode, 'login'),
+        title: () => loc(labelCode, 'login'),
         click: function() {
           form.clearErrors();
           if (this.model.isValid()) {

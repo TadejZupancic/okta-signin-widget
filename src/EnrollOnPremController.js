@@ -63,7 +63,7 @@ export default FormController.extend({
     const factors = this.options.appState.get('factors');
     const factor = factors.findWhere(_.pick(this.options, 'provider', 'factorType'));
     const vendorName = factor.get('vendorName');
-    const title = isRSA(provider) ? loc('factor.totpHard.rsaSecurId', 'login') : vendorName;
+    const title = isRSA(provider) ? () => loc('factor.totpHard.rsaSecurId', 'login') : vendorName;
 
     return {
       title: title,
@@ -82,7 +82,7 @@ export default FormController.extend({
       },
       formChildren: [
         FormType.Input({
-          label: loc('enroll.onprem.username.placeholder', 'login', [vendorName]),
+          label: () => loc('enroll.onprem.username.placeholder', 'login', [vendorName]),
           'label-top': true,
           explain: Util.createInputExplain(
             'enroll.onprem.username.tooltip',
@@ -97,7 +97,7 @@ export default FormController.extend({
           type: 'text',
         }),
         FormType.Input({
-          label: loc('enroll.onprem.passcode.placeholder', 'login', [vendorName]),
+          label: () => loc('enroll.onprem.passcode.placeholder', 'login', [vendorName]),
           'label-top': true,
           explain: Util.createInputExplain(
             'enroll.onprem.passcode.tooltip',
@@ -113,7 +113,7 @@ export default FormController.extend({
         }),
         FormType.Toolbar({
           noCancelButton: true,
-          save: loc('mfa.challenge.verify', 'login'),
+          save: () => loc('mfa.challenge.verify', 'login'),
         }),
       ],
     };

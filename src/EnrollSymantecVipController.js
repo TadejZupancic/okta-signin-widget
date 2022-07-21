@@ -50,7 +50,7 @@ export default FormController.extend({
     formChildren: function() {
       return [
         FormType.Input({
-          label: loc('enroll.symantecVip.credentialId.placeholder', 'login'),
+          label: () => loc('enroll.symantecVip.credentialId.placeholder', 'login'),
           'label-top': true,
           explain: Util.createInputExplain(
             'enroll.symantecVip.credentialId.tooltip',
@@ -63,7 +63,7 @@ export default FormController.extend({
           type: 'text',
         }),
         FormType.Input({
-          label: loc('enroll.symantecVip.passcode1.placeholder', 'login'),
+          label: () => loc('enroll.symantecVip.passcode1.placeholder', 'login'),
           'label-top': true,
           explain: Util.createInputExplain(
             'enroll.symantecVip.passcode1.tooltip',
@@ -76,7 +76,7 @@ export default FormController.extend({
           type: 'text',
         }),
         FormType.Input({
-          label: loc('enroll.symantecVip.passcode2.placeholder', 'login'),
+          label: () => loc('enroll.symantecVip.passcode2.placeholder', 'login'),
           'label-top': true,
           explain: Util.createInputExplain(
             'enroll.symantecVip.passcode2.tooltip',
@@ -90,7 +90,7 @@ export default FormController.extend({
         }),
         FormType.Toolbar({
           noCancelButton: true,
-          save: loc('mfa.challenge.verify', 'login'),
+          save: () => loc('mfa.challenge.verify', 'login'),
         }),
       ];
     },

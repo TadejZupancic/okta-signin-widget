@@ -26,7 +26,7 @@ export default View.extend({
     const socialIdpButtons = this.settings.get('configuredSocialIdps');
     const pivButton = this.settings.get('piv');
     const customButtons = this.settings.get('customButtons');
-    const divider = dividerTpl({ text: loc('socialauth.divider.text', 'login') });
+    const divider = dividerTpl({ text: () => loc('socialauth.divider.text', 'login') });
 
     if (this.settings.get('hasPivCard')) {
       children.push(this._createPivButton(pivButton));
@@ -54,7 +54,7 @@ export default View.extend({
     // Okta form, just add the divider at the top of the social auth container. The title still
     // lives in primary auth form.
     if (this.settings.get('socialAuthPositionTop')) {
-      children.unshift(formTitleTpl({ title: loc('primaryauth.title', 'login') }));
+      children.unshift(formTitleTpl({ title: () => loc('primaryauth.title', 'login') }));
       // Divider between Primary Auth and the Social Auth
       children.push(divider);
     } else {
@@ -104,7 +104,7 @@ export default View.extend({
         'data-se': 'piv-card-button',
       },
       className: className + ' piv-button',
-      title: options.text || loc('piv.cac.card', 'login'),
+      title: options.text || (() => loc('piv.cac.card', 'login')),
       click: function(e) {
         e.preventDefault();
         this.options.appState.trigger('navigate', 'signin/verify/piv');
@@ -119,7 +119,7 @@ export default View.extend({
       },
       className: options.className + ' default-custom-button',
       title: function() {
-        return options.title || loc(options.i18nKey);
+        return options.title || (() =>loc(options.i18nKey));
       },
       click: options.click,
     });

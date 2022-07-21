@@ -34,9 +34,9 @@ function getFormAndButtonDetails(factorType) {
     return {
       buttonDataSe: 'sms-send-code',
       buttonClassName: 'sms-request-button',
-      formSubmit: loc('mfa.sendCode', 'login'),
-      formRetry: loc('mfa.resendCode', 'login'),
-      formSubmitted: loc('mfa.sent', 'login'),
+      formSubmit: () => loc('mfa.sendCode', 'login'),
+      formRetry: () => loc('mfa.resendCode', 'login'),
+      formSubmitted: () => loc('mfa.sent', 'login'),
       subtitle: subtitleTpl({ subtitle: this.model.get('phoneNumber') }),
       warning: loc('factor.sms.time.warning', 'login'),
     };
@@ -44,19 +44,19 @@ function getFormAndButtonDetails(factorType) {
     return {
       buttonDataSe: 'make-call',
       buttonClassName: 'call-request-button',
-      formSubmit: loc('mfa.call', 'login'),
-      formRetry: loc('mfa.redial', 'login'),
-      formSubmitted: loc('mfa.calling', 'login'),
+      formSubmit: () => loc('mfa.call', 'login'),
+      formRetry: () => loc('mfa.redial', 'login'),
+      formSubmitted: () => loc('mfa.calling', 'login'),
       subtitle: subtitleTpl({ subtitle: this.model.get('phoneNumber') }),
-      warning: loc('factor.call.time.warning', 'login'),
+      warning: () => loc('factor.call.time.warning', 'login'),
     };
   case 'email':
     return {
       buttonDataSe: 'email-send-code',
       buttonClassName: 'email-request-button',
-      formSubmit: loc('mfa.sendEmail', 'login'),
-      formRetry: loc('mfa.resendEmail', 'login'),
-      formSubmitted: loc('mfa.sent', 'login'),
+      formSubmit: () => loc('mfa.sendEmail', 'login'),
+      formRetry: () => loc('mfa.resendEmail', 'login'),
+      formSubmitted: () => loc('mfa.sent', 'login'),
       subtitle: subtitleTpl({ subtitle: this.model.get('email') }),
     };
   default:
@@ -106,7 +106,7 @@ export default Form.extend({
       this.clearErrors();
     });
     this.addInput({
-      label: loc('mfa.challenge.enterCode.placeholder', 'login'),
+      label: () => loc('mfa.challenge.enterCode.placeholder', 'login'),
       'label-top': true,
       className: 'o-form-fieldset o-form-label-top auth-passcode',
       name: 'answer',

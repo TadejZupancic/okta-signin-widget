@@ -367,11 +367,11 @@ export default Model.extend({
     }
 
     if (!baseUrl) {
-      this.callGlobalError(new ConfigError(loc('error.required.baseUrl')));
+      this.callGlobalError(new ConfigError(() => loc('error.required.baseUrl')));
     } else if (colors && _.isString(colors.brand) && !colors.brand.match(/^#[0-9A-Fa-f]{6}$/)) {
-      this.callGlobalError(new ConfigError(loc('error.invalid.colors.brand')));
+      this.callGlobalError(new ConfigError(() => loc('error.invalid.colors.brand')));
     } else if (BrowserFeatures.corsIsNotSupported()) {
-      this.callGlobalError(new UnsupportedBrowserError(loc('error.unsupported.cors')));
+      this.callGlobalError(new UnsupportedBrowserError(() => loc('error.unsupported.cors')));
     }
   },
 
@@ -379,6 +379,11 @@ export default Model.extend({
     if (authClient) {
       authClient.http.setRequestHeader('Accept-Language', this.get('languageCode'));
     }
+  },
+
+  setLanguage: function(language) {
+    this.set('language',language);
+    if (this.authClient) this.authClient.http.setRequestHeader('Accept-Language', language);
   },
 
   setAuthClient: function(authClient) {

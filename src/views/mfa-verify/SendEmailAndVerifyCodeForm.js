@@ -92,7 +92,7 @@ const SendEmailAndVerifyCodeFormVerifyEmailCodeForm = Form.extend({
     this.add(ResendEmailView);
 
     this.addInput({
-      label: loc('email.code.label', 'login'),
+      label: () => loc('email.code.label', 'login'),
       'label-top': true,
       name: 'answer',
       input: TextBox,

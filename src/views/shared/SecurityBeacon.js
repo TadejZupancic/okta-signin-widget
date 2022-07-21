@@ -58,8 +58,8 @@ function antiPhishingMessage(image, host) {
   image.qtip({
     prerender: true,
     content: {
-      text: loc('primaryauth.newUser.tooltip', 'login', [_.escape(host)]),
-      button: loc('primaryauth.newUser.tooltip.close', 'login'),
+      text: () => loc('primaryauth.newUser.tooltip', 'login', [_.escape(host)]),
+      button: () => loc('primaryauth.newUser.tooltip.close', 'login'),
     },
     style: {
       classes: 'okta-security-image-tooltip security-image-qtip qtip-custom qtip-shadow qtip-rounded',

@@ -42,8 +42,8 @@ export default View.extend({
 
   getTemplateData: function() {
     const templateData = {
-      label: loc('registration.signup.label', 'login'),
-      text: loc('registration.signup.text', 'login'),
+      label: () => loc('registration.signup.label', 'login'),
+      text: () => loc('registration.signup.text', 'login'),
     };
 
     return templateData;

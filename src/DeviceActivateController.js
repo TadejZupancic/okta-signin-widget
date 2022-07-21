@@ -63,7 +63,7 @@ export default FormController.extend({
 
       return [
         FormType.Input({
-          label: loc('device.code.activate.label', 'login'),
+          label: () => loc('device.code.activate.label', 'login'),
           'label-top': true,
           name: 'userCode',
           input: TextBox,

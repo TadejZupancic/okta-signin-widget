@@ -42,8 +42,8 @@ export default FormController.extend({
 
     formChildren: function() {
       const instructions = this.settings.get('brandName')
-        ? loc('enroll.totp.manualSetupInstructions.specific', 'login', [this.settings.get('brandName')])
-        : loc('enroll.totp.manualSetupInstructions.generic', 'login');
+        ? () => loc('enroll.totp.manualSetupInstructions.specific', 'login', [this.settings.get('brandName')])
+        : () => loc('enroll.totp.manualSetupInstructions.generic', 'login');
 
       return [
         FormType.View({
@@ -70,7 +70,7 @@ export default FormController.extend({
         }),
         FormType.Toolbar({
           noCancelButton: true,
-          save: loc('oform.next', 'login'),
+          save: () => loc('oform.next', 'login'),
         }),
       ];
     },

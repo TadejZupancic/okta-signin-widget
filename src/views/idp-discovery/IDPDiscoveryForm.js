@@ -28,7 +28,7 @@ export default PrimaryAuthForm.extend({
     const inputs = [];
     const usernameProps = {
       className: 'margin-btm-30',
-      label: loc('primaryauth.username.placeholder', 'login'),
+      label: () => loc('primaryauth.username.placeholder', 'login'),
       inputId: 'idp-discovery-username',
       disabled: false,
     };

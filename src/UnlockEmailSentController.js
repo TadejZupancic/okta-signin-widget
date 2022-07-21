@@ -36,7 +36,7 @@ export default FormController.extend({
     formChildren: function() {
       return [
         FormType.Button({
-          title: loc('goback', 'login'),
+          title: () => loc('goback', 'login'),
           className: 'button button-primary button-wide',
           attributes: { 'data-se': 'back-button' },
           click: function() {
